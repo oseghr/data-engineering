@@ -11,21 +11,21 @@ What's the version of `pip` in the image?
 - confirm docker version:
 ```bash
 docker --version
-```
+
 - create the docker image:
-``` bash
+
 docker run -it --rm --entrypoint=bash python:3.13
-```
+
 - update packages:
-```bash
+
 apt update
-```
+
 - confirm python version:
-```bash
+`
 python --version
-```
+
 - check pip version:
-```bash
+
 pip --version
 ```
 ## Answer: 
@@ -70,6 +70,7 @@ volumes:
 
 ## Answer: 
 *** postgres:5432 ***
+
 
 
 
