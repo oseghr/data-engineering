@@ -8,24 +8,20 @@ Run docker with the `python:3.13` image. Use an entrypoint `bash` to interact wi
 What's the version of `pip` in the image?
 
 ## Steps:
-- confirm docker version:
 ```bash
+# confirm docker version:
 docker --version
 
-- create the docker image:
-
+# create the docker image:
 docker run -it --rm --entrypoint=bash python:3.13
 
-- update packages:
-
+# update packages:
 apt update
 
-- confirm python version:
-`
+# confirm python version:
 python --version
 
-- check pip version:
-
+# check pip version:
 pip --version
 ```
 ## Answer: 
@@ -70,6 +66,7 @@ volumes:
 
 ## Answer: 
 *** postgres:5432 ***
+
 
 
 
