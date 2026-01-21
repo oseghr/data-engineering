@@ -28,7 +28,9 @@ python --version
 ```bash
 pip --version
 ```
-**Answer: pip 25.3 from /usr/local/lib/python3.13/site-packages/pip (python 3.13)**
+## Answer: 
+*** pip 25.3 from /usr/local/lib/python3.13/site-packages/pip (python 3.13) ***
+
 
 ## Question 2. Understanding Docker networking and docker-compose
 
@@ -66,7 +68,9 @@ volumes:
     name: vol-pgadmin_data
 ```
 
-**Answer: postgres:5432**
+## Answer: 
+*** postgres:5432 ***
+
 
 
 
