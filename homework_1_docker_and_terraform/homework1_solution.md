@@ -25,7 +25,7 @@ python --version
 pip --version
 ```
 ## Answer: 
-*** pip 25.3 from /usr/local/lib/python3.13/site-packages/pip (python 3.13) ***
+- pip 25.3 from /usr/local/lib/python3.13/site-packages/pip (python 3.13)
 
 
 ## Question 2. Understanding Docker networking and docker-compose
@@ -65,7 +65,8 @@ volumes:
 ```
 
 ## Answer:
-** postgres:5432 **
+- postgres:5432
+
 
 
 
