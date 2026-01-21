@@ -64,8 +64,9 @@ volumes:
     name: vol-pgadmin_data
 ```
 
-## Answer: 
-*** postgres:5432 ***
+## Answer:
+** postgres:5432 **
+
 
 
 
