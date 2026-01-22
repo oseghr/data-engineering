@@ -65,7 +65,8 @@ volumes:
 ```
 
 ## Answer:
-- postgres:5432
+- db:5432
+
 
 
 
