@@ -157,7 +157,6 @@ ON nt."PULocationID" = tl."LocationID"
  DOLocationID | drop_zone                           | max   | Zone              |
 |--------------+-------------------------------------+-------+-------------------|
 | 263          | Yorkville West                      | 81.89 | East Harlem North |
-| 138          | LaGuardia Airport                   | 50.0  | East Harlem North 
 ```
 - SOLUTION: Yorkville West
 
