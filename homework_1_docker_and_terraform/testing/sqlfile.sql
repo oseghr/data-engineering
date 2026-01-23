@@ -33,6 +33,8 @@ GROUP BY "PULocationID"
 ORDER BY total_amount DESC;
 
 
+----------------------------------------------------------------------------------
+
 
 SELECT PULocationID,
        SUM(fare_amount) AS total_amount
@@ -41,3 +43,32 @@ WHERE lpep_pickup_datetime >= '2025-11-18'
   AND lpep_pickup_datetime <  '2025-11-19'
 GROUP BY PULocationID
 ORDER BY total_amount DESC;
+
+-------------------------------------------------------------------------------------
+
+SELECT nt."DOLocationID", sum(nt.tip_amount) as tip_total, tl."LocationID", tl."Zone"
+  FROM nyc_taxi nt
+  LEFT JOIN taxi_lookup tl
+  ON nt."PULocationID" = tl."LocationID"
+ WHERE lpep_pickup_datetime >= '2025-11-01'
+   AND lpep_pickup_datetime <  '2025-12-01'
+   AND tl."Zone" = 'East Harlem North'
+ GROUP BY nt."DOLocationID", tl."LocationID",tl."Zone" 
+ ORDER BY total_amount DESC;
+
+
+--------------------------------------------------------------------------------------
+
+SELECT 
+  nt."DOLocationID",
+  (SELECT "Zone" FROM taxi_lookup WHERE "LocationID" = nt."DOLocationID") as drop_zone, 
+  MAX(nt.tip_amount), 
+  tl."Zone"
+FROM nyc_taxi nt
+LEFT JOIN taxi_lookup tl
+ON nt."PULocationID" = tl."LocationID"
+  WHERE lpep_pickup_datetime >= '2025-11-01'
+    AND lpep_pickup_datetime <  '2025-12-01'
+    AND nt."PULocationID" = 74
+  GROUP BY nt."DOLocationID", tl."LocationID",tl."Zone", drop_zone 
+  ORDER BY MAX(nt.tip_amount) DESC;
