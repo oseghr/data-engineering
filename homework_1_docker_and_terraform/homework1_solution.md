@@ -139,23 +139,28 @@ Note: it's `tip` , not `trip`. We need the name of the zone, not the ID.
 ## Answer
 ```sql
 SELECT 
-  nt."DOLocationID",
-  (SELECT "Zone" FROM taxi_lookup WHERE "LocationID" = nt."DOLocationID") as drop_zone, 
-  MAX(nt.tip_amount), 
-  tl."Zone"
-FROM nyc_taxi nt
-LEFT JOIN taxi_lookup tl
-ON nt."PULocationID" = tl."LocationID"
-  WHERE lpep_pickup_datetime >= '2025-11-01'
-    AND lpep_pickup_datetime <  '2025-12-01'
-    AND nt."PULocationID" = 74
-  GROUP BY nt."DOLocationID", tl."LocationID",tl."Zone", drop_zone 
-  ORDER BY MAX(nt.tip_amount) DESC;
+   nt."DOLocationID",
+   dz."Zone" as drop_zone,
+   MAX(nt.tip_amount), 
+   pu."Zone"
+ FROM nyc_taxi nt
+ LEFT JOIN taxi_lookup pu
+ ON nt."PULocationID" = pu."LocationID"
+ LEFT JOIN taxi_lookup dz
+ ON nt."DOLocationID" = dz."LocationID"
+   WHERE nt.lpep_pickup_datetime >= '2025-11-01'
+     AND nt.lpep_pickup_datetime <  '2025-12-01'
+     AND nt."PULocationID" = 74
+   GROUP BY nt."DOLocationID", drop_zone, pu."Zone"  
+   ORDER BY MAX(nt.tip_amount) DESC 
+   LIMIT 1;
 ```
 ```bash
- DOLocationID | drop_zone                           | max   | Zone              |
-|--------------+-------------------------------------+-------+-------------------|
-| 263          | Yorkville West                      | 81.89 | East Harlem North |
++--------------+----------------+-------+-------------------+
+| DOLocationID | drop_zone      | max   | Zone              |
+|--------------+----------------+-------+-------------------|
+| 263          | Yorkville West | 81.89 | East Harlem North |
++--------------+----------------+-------+-------------------+
 ```
 - SOLUTION: Yorkville West
 

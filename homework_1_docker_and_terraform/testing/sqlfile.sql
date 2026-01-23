@@ -72,3 +72,21 @@ ON nt."PULocationID" = tl."LocationID"
     AND nt."PULocationID" = 74
   GROUP BY nt."DOLocationID", tl."LocationID",tl."Zone", drop_zone 
   ORDER BY MAX(nt.tip_amount) DESC;
+
+
+
+SELECT 
+  nt."DOLocationID",
+  dz."Zone" as drop_zone,
+  MAX(nt.tip_amount), 
+  pu."Zone"
+FROM nyc_taxi nt
+LEFT JOIN taxi_lookup pu
+ON nt."PULocationID" = pu."LocationID"
+LEFT JOIN taxi_lookup dz
+ON nt."DOLocationID" = dz."LocationID"
+  WHERE nt.lpep_pickup_datetime >= '2025-11-01'
+    AND nt.lpep_pickup_datetime <  '2025-12-01'
+    AND nt."PULocationID" = 74
+  GROUP BY nt."DOLocationID", drop_zone, pu."Zone"  
+  ORDER BY MAX(nt.tip_amount) DESC;
