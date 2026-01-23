@@ -141,6 +141,30 @@ Note: it's `tip` , not `trip`. We need the name of the zone, not the ID.
 - East Harlem North
 - LaGuardia Airport
 
+## Answer
+```sql
+SELECT 
+  nt."DOLocationID",
+  (SELECT "Zone" FROM taxi_lookup WHERE "LocationID" = nt."DOLocationID") as drop_zone, 
+  MAX(nt.tip_amount), 
+  tl."Zone"
+FROM nyc_taxi nt
+LEFT JOIN taxi_lookup tl
+ON nt."PULocationID" = tl."LocationID"
+  WHERE lpep_pickup_datetime >= '2025-11-01'
+    AND lpep_pickup_datetime <  '2025-12-01'
+    AND nt."PULocationID" = 74
+  GROUP BY nt."DOLocationID", tl."LocationID",tl."Zone", drop_zone 
+  ORDER BY MAX(nt.tip_amount) DESC;
+```
+```bash
+ DOLocationID | drop_zone                           | max   | Zone              |
+|--------------+-------------------------------------+-------+-------------------|
+| 263          | Yorkville West                      | 81.89 | East Harlem North |
+| 138          | LaGuardia Airport                   | 50.0  | East Harlem North 
+```
+- SOLUTION: Yorkville West
+
 
 ## Terraform
 
