@@ -136,13 +136,9 @@ For the passengers picked up in the zone named "East Harlem North" in November 2
 
 Note: it's `tip` , not `trip`. We need the name of the zone, not the ID.
 
-- JFK Airport
-- Yorkville West
-- East Harlem North
-- LaGuardia Airport
-
 ## Answer
-```sql
+```
+sql
 SELECT 
   nt."DOLocationID",
   (SELECT "Zone" FROM taxi_lookup WHERE "LocationID" = nt."DOLocationID") as drop_zone, 
