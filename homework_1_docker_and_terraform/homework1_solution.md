@@ -25,7 +25,7 @@ python --version
 pip --version
 ```
 ## Answer: 
-- pip 25.3 from /usr/local/lib/python3.13/site-packages/pip (python 3.13)
+- SOLUTION: pip 25.3 from /usr/local/lib/python3.13/site-packages/pip (python 3.13)
 
 
 ## Question 2. Understanding Docker networking and docker-compose
@@ -65,7 +65,7 @@ volumes:
 ```
 
 ## Answer:
-- db:5432
+- SOLUTION: db:5432
 
 
 
@@ -81,7 +81,7 @@ SELECT COUNT(*) as trip_count
    AND lpep_pickup_datetime < '2025-12-01'
    AND trip_distance <= 1;
 ```
-- RESULT: 8,007
+- SOLUTION: 8,007
 
 
 
@@ -183,10 +183,8 @@ Which of the following sequences, respectively, describes the workflow for:
 2. Generating proposed changes and auto-executing the plan
 3. Remove all resources managed by terraform`
 
-Answers:
-- terraform import, terraform apply -y, terraform destroy
-- teraform init, terraform plan -auto-apply, terraform rm
-- terraform init, terraform run -auto-approve, terraform destroy
-- terraform init, terraform apply -auto-approve, terraform destroy
-- terraform import, terraform apply -y, terraform rm
+## Answers:
+- SOLUTION: terraform init, terraform apply -auto-approve, terraform destroy
+
+
 
