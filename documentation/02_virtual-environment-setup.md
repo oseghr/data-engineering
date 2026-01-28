@@ -81,7 +81,14 @@ which python        # System Python
 python -V
 ```
 
-You'll see they're different - `uv run` uses the isolated environment.
+You'll see they're different - `uv run` creates the isolated environment.
+
+### Activate the Virtual Environment
+
+To activate your virtual environment use; 
+```bash
+source filepath/.venv/bin/activate
+```
 
 ### Adding Dependencies
 

@@ -51,7 +51,7 @@ docker run -it \
 
 ## Connecting to PostgreSQL
 
-Once the container is running, we can log into our database with [pgcli](https://www.pgcli.com/).
+Once the container is running, we can log into our database with [pgcli](https://www.pgcli.com/). We can also connect using pgadmin.
 
 Install pgcli:
 
