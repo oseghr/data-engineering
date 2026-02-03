@@ -9,32 +9,32 @@ terraform {
 
 provider "google" {
   # Configuration options
-  credentials = "/workspaces/data-engineering/homework_2_kestra/keys/cred.json"
+  credentials = "${GOOGLE_CREDENTIALS}"
   project     = "dataproject-484804"
   region      = "us-central1"
 }
 
 
-# resource "google_storage_bucket" "auto-expire" {
-#   name          = "auto-expiring-bucket"
-#   location      = "US"
-#   force_destroy = true
+resource "google_storage_bucket" "auto-expire" {
+  name          = "auto-expiring-bucket"
+  location      = "US"
+  force_destroy = true
 
-#   lifecycle_rule {
-#     condition {
-#       age = 3
-#     }
-#     action {
-#       type = "Delete"
-#     }
-#   }
+  lifecycle_rule {
+    condition {
+      age = 3
+    }
+    action {
+      type = "Delete"
+    }
+  }
 
-#   lifecycle_rule {
-#     condition {
-#       age = 1
-#     }
-#     action {
-#       type = "AbortIncompleteMultipartUpload"
-#     }
-#   }
-# }
+  lifecycle_rule {
+    condition {
+      age = 1
+    }
+    action {
+      type = "AbortIncompleteMultipartUpload"
+    }
+  }
+}
