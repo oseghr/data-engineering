@@ -403,7 +403,10 @@ docker ps
 # Connect to pgdatabase
 # Query: SELECT COUNT(*) FROM yellow_taxi_data;
 
-# 7. Celebrate! 🎉
+# 7. Stop services
+docker-compose down
+
+# 8. Celebrate! 🎉
 ```
 
 ## Need Help?

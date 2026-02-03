@@ -10,7 +10,7 @@ terraform {
 provider "google" {
   # Configuration options
   credentials = "${GOOGLE_CREDENTIALS}"
-  project     = "dataproject-484804"
+  project     = "dataproject"
   region      = "us-central1"
 }
 
