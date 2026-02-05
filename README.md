@@ -55,3 +55,8 @@ Advanced workflow orchestration with Kestra:
    ```bash
    git clone <repository-url>
    cd data-engineering
+
+
+
+
+   https://github.com/oseghr/data-engineering/blob/main/homework_2_kestra/homework2_solution.md
