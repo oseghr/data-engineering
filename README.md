@@ -49,12 +49,7 @@ Advanced workflow orchestration with Kestra:
 - Python 3.13+
 - Git
 
-### Quick Start with Docker
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd data-engineering
 
 
 
