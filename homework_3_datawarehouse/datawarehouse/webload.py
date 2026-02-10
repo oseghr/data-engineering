@@ -1,8 +1,9 @@
-# import io
-# import os
-# import requests
-# import pandas as pd
-# from google.cloud import storage
+import os
+import requests
+import pandas as pd
+import pyarrow.csv as pv
+import pyarrow.parquet as pq
+from google.cloud import storage
 
 # """
 # Pre-reqs: 
@@ -65,12 +66,7 @@
 # web_to_gcs('2024', 'yellow')
 
 
-import os
-import requests
-import pandas as pd
-import pyarrow.csv as pv
-import pyarrow.parquet as pq
-from google.cloud import storage
+
 
 # Use official NYC TLC data source
 init_url = 'https://d37ci6vzurychx.cloudfront.net/trip-data/'
