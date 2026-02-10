@@ -74,7 +74,7 @@ from google.cloud import storage
 
 # Use official NYC TLC data source
 init_url = 'https://d37ci6vzurychx.cloudfront.net/trip-data/'
-BUCKET = "dataproject-484804-demo-bucket"
+BUCKET = "dataproject-484804_hw3_bucket"
 
 
 def upload_to_gcs(bucket_name, object_name, local_file):
@@ -125,9 +125,7 @@ def web_to_gcs(year, service):
 
 
 # Run for years that actually exist
-# web_to_gcs('2019', 'yellow')
-# web_to_gcs('2020', 'yellow')
-# web_to_gcs('2021', 'yellow')
+
 # web_to_gcs('2022', 'yellow')
 web_to_gcs('2024', 'yellow')
 # 2024 might not have all months available yet
