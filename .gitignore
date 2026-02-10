@@ -1,10 +1,12 @@
 *.parquet
 *.csv
 
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
 *$py.class
+keys/
 
 # C extensions
 *.so

@@ -9,14 +9,14 @@ terraform {
 
 provider "google" {
   # Configuration options
-  credentials = "${GOOGLE_CREDENTIALS}"
-  project     = "dataproject"
+  # credentials = set up your environment variable GOOGLE_APPLICATION_CREDENTIALS to point to your service account key file using cli variable to credential json file for bucket keys. 
+  project     = "dataproject-484804"
   region      = "us-central1"
 }
 
 
-resource "google_storage_bucket" "auto-expire" {
-  name          = "auto-expiring-bucket"
+resource "google_storage_bucket" "demo_bucket" {
+  name          = "dataproject-484804-demo-bucket"
   location      = "US"
   force_destroy = true
 
