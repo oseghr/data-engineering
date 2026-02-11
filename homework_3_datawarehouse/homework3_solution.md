@@ -180,10 +180,10 @@ Where is the data stored in the External Table you created?
 
 ## Answer
 - SOLUTION: GCP Bucket (your data is in gs://dataproject_hw3_dataset/yellow/)
-Explanation:
-    - External tables don't store data in BigQuery
-    - They query data directly from Google Cloud Storage
-    - Regular tables store data in BigQuery's internal storage
+    - Explanation:
+        - External tables don't store data in BigQuery
+        - They query data directly from Google Cloud Storage
+        - Regular tables store data in BigQuery's internal storage
 
 
 
@@ -193,14 +193,13 @@ It is best practice in Big Query to always cluster your data:
 
 ## Answer
 - SOLUTION: False
-Explanation:
-
-    - Clustering is NOT always beneficial
-    - Only helpful when:
-        - Table > 1 GB
-        - You frequently filter/sort by specific columns
-        - Query patterns are predictable
-    - Small tables or random query patterns = clustering adds overhead with no benefit
+    - Explanation:
+        - Clustering is NOT always beneficial
+        - Only helpful when:
+            - Table > 1 GB
+            - You frequently filter/sort by specific columns
+            - Query patterns are predictable
+        - Small tables or random query patterns = clustering adds overhead with no benefit
 
 
 
@@ -216,8 +215,8 @@ FROM `dataproject-484804.dataproject_hw3_dataset.yellow_tripdata_2024_material`;
 
 - SOLUTION  0MB (BigQuery stores metadata about row counts)
 
-Why this estimate?
-- COUNT(*) doesn't need to read actual data
-    - BigQuery stores metadata about row counts
-    - Should show 0 MB because it uses table metadata, not the actual rows
-    - If it shows bytes, BigQuery might be reading column data unnecessarily
+    - Why this estimate?
+        - COUNT(*) doesn't need to read actual data
+        - BigQuery stores metadata about row counts
+        - Should show 0 MB because it uses table metadata, not the actual rows
+        - If it shows bytes, BigQuery might be reading column data unnecessarily
