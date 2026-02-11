@@ -88,6 +88,7 @@ FROM `dataproject-484804.dataproject_hw3_dataset.yellow_tripdata_2024_material`;
 - SOLUTION: 0 MB for the External Table and 155.12 MB for the Materialized Table
 
 
+
 ## Question 3. Understanding columnar storage
 
 Write a query to retrieve the PULocationID from the table (not the external table) in BigQuery. Now write a query to retrieve the PULocationID and DOLocationID on the same table.
@@ -156,27 +157,51 @@ Use the materialized table you created earlier in your from clause and note the 
 
 Choose the answer which most closely matches.
  
+## Answer
+```sql
+-- Query on NON-PARTITIONED table (check estimate)
+SELECT DISTINCT VendorID
+FROM `dataproject-484804.dataproject_hw3_dataset.yellow_tripdata_2024`
+WHERE DATE(tpep_dropoff_datetime) BETWEEN '2024-03-01' AND '2024-03-15';
 
-- 12.47 MB for non-partitioned table and 326.42 MB for the partitioned table
-- 310.24 MB for non-partitioned table and 26.84 MB for the partitioned table
-- 5.87 MB for non-partitioned table and 0 MB for the partitioned table
-- 310.31 MB for non-partitioned table and 285.64 MB for the partitioned table
+-- Query on PARTITIONED table (check estimate)
+SELECT DISTINCT VendorID
+FROM `dataproject_hw3_dataset.yellow_tripdata_partitioned_clustered`
+WHERE DATE(tpep_dropoff_datetime) BETWEEN '2024-03-01' AND '2024-03-15';
+```
+
+- SOLUTION: 310.24 MB for non-partitioned table and 26.84 MB for the partitioned table
+
 
 
 ## Question 7. External table storage
 
 Where is the data stored in the External Table you created?
 
-- Big Query
-- Container Registry
-- GCP Bucket
-- Big Table
+## Answer
+- SOLUTION: GCP Bucket (your data is in gs://dataproject_hw3_dataset/yellow/)
+Explanation:
+- External tables don't store data in BigQuery
+- They query data directly from Google Cloud Storage
+- Regular tables store data in BigQuery's internal storage
+
+
 
 ## Question 8. Clustering best practices
 
 It is best practice in Big Query to always cluster your data:
-- True
-- False
+
+## Answer
+- SOLUTION: False
+Explanation:
+
+- Clustering is NOT always beneficial
+- Only helpful when:
+    - Table > 1 GB
+    - You frequently filter/sort by specific columns
+    - Query patterns are predictable
+- Small tables or random query patterns = clustering adds overhead with no benefit
+
 
 
 ## Question 9. Understanding table scans
@@ -189,4 +214,10 @@ SELECT COUNT(*)
 FROM `dataproject-484804.dataproject_hw3_dataset.yellow_tripdata_2024_material`;
 ```
 
-- SOLUTION  0MB
+- SOLUTION  0MB (BigQuery stores metadata about row counts)
+
+Why this estimate?
+- COUNT(*) doesn't need to read actual data
+- BigQuery stores metadata about row counts
+- Should show 0 MB because it uses table metadata, not the actual rows
+- If it shows bytes, BigQuery might be reading column data unnecessarily
