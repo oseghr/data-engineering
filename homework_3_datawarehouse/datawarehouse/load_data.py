@@ -123,7 +123,7 @@ import time
 
 
 # Configuration
-BUCKET_NAME = "dataproject-484804_hw3_bucket"
+BUCKET_NAME = "20260210_oseghr_bucket"
 CREDENTIALS_FILE = "gcs.json"
 DOWNLOAD_DIR = "./downloads"
 CHUNK_SIZE = 8 * 1024 * 1024  # 8MB chunks

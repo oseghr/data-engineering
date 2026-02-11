@@ -2,7 +2,7 @@
 -- SETUP
 -- ============================================
 First, make sure you have:
-✅ Data loaded in GCS: gs://dezoomcamp_hw3_2025/yellow/'*'.parquet 
+✅ Data loaded in GCS: gs://dataproject_hw3_dataset/yellow/'*'.parquet 
     -- by running the webload.py script
 ✅ Dataset created in BigQuery: 
     bq mk --dataset --location=US dataproject_hw3_dataset --> by running the command on terminal

@@ -70,7 +70,7 @@ from google.cloud import storage
 
 # Use official NYC TLC data source
 init_url = 'https://d37ci6vzurychx.cloudfront.net/trip-data/'
-BUCKET = "dataproject-484804_hw3_bucket"
+BUCKET = "oseghr_bucket_20260210"
 
 
 def upload_to_gcs(bucket_name, object_name, local_file):

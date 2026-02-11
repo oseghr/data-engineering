@@ -47,51 +47,102 @@ Create a (regular/materialized) table in BQ using the Yellow Taxi Trip Records (
 ## Question 1. Counting records
 
 What is count of records for the 2024 Yellow Taxi Data?
-- 65,623
-- 840,402
-- 20,332,093
-- 85,431,289
+
+## Answer
+```sql
+SELECT COUNT(*) FROM `dataproject-484804.dataproject_hw3_dataset.yellow_tripdata_2024`;
+```
+```bash
++--------------+
+| total_count  | 
+|--------------+
+| 20332093     | 
++--------------+
+```
+- SOLUTION: 20,332,093
+
 
 
 ## Question 2. Data read estimation
 
 Write a query to count the distinct number of PULocationIDs for the entire dataset on both the tables.
- 
+
 What is the **estimated amount** of data that will be read when this query is executed on the External Table and the Table?
 
-- 18.82 MB for the External Table and 47.60 MB for the Materialized Table
-- 0 MB for the External Table and 155.12 MB for the Materialized Table
-- 2.14 GB for the External Table and 0MB for the Materialized Table
-- 0 MB for the External Table and 0MB for the Materialized Table
+## Answer
+```sql
+SELECT COUNT(DISTINCT PULocationID)
+FROM `dataproject-484804.dataproject_hw3_dataset.yellow_tripdata_2024`; -- external table
+
+SELECT COUNT(DISTINCT PULocationID)
+FROM `dataproject-484804.dataproject_hw3_dataset.yellow_tripdata_2024_material`;  -- materialized table
+```
+```bash
++--------------+
+|total_distinct| 
+|--------------+
+| 262          | 
++--------------+
+```
+
+- SOLUTION: 0 MB for the External Table and 155.12 MB for the Materialized Table
+
 
 ## Question 3. Understanding columnar storage
 
 Write a query to retrieve the PULocationID from the table (not the external table) in BigQuery. Now write a query to retrieve the PULocationID and DOLocationID on the same table.
 
 Why are the estimated number of Bytes different?
-- BigQuery is a columnar database, and it only scans the specific columns requested in the query. Querying two columns (PULocationID, DOLocationID) requires 
+
+## Answer
+```sql
+-- Single column (check estimate)
+SELECT PULocationID
+FROM `dataproject-484804.dataproject_hw3_dataset.yellow_tripdata_2024_material`; -- 155.12MB
+
+-- Two columns (check estimate)
+SELECT PULocationID, DOLocationID
+FROM `dataproject-484804.dataproject_hw3_dataset.yellow_tripdata_2024_material`; -- 310.24MB
+```
+
+- SOLUTION: BigQuery is a columnar database, and it only scans the specific columns requested in the query. Querying two columns (PULocationID, DOLocationID) requires 
 reading more data than querying one column (PULocationID), leading to a higher estimated number of bytes processed.
-- BigQuery duplicates data across multiple storage partitions, so selecting two columns instead of one requires scanning the table twice, 
-doubling the estimated bytes processed.
-- BigQuery automatically caches the first queried column, so adding a second column increases processing time but does not affect the estimated bytes scanned.
-- When selecting multiple columns, BigQuery performs an implicit join operation between them, increasing the estimated bytes processed
+
+
+
 
 ## Question 4. Counting zero fare trips
 
 How many records have a fare_amount of 0?
-- 128,210
-- 546,578
-- 20,188,016
-- 8,333
+
+## Answer
+```sql
+-- Count records (fare_amount = 0)
+SELECT COUNT(fare_amount)
+FROM `dataproject-484804.dataproject_hw3_dataset.yellow_tripdata_2024_material`
+WHERE fare_amount = 0;
+```
+
+- SOLUTION: 8,333
+
+
 
 ## Question 5. Partitioning and clustering
 
 What is the best strategy to make an optimized table in Big Query if your query will always filter based on tpep_dropoff_datetime and order the results by VendorID (Create a new table with this strategy)
 
-- Partition by tpep_dropoff_datetime and Cluster on VendorID
-- Cluster on by tpep_dropoff_datetime and Cluster on VendorID
-- Cluster on tpep_dropoff_datetime Partition by VendorID
-- Partition by tpep_dropoff_datetime and Partition by VendorID
+## Answer
+```sql
+-- Create partitioned and clustered table
+CREATE OR REPLACE TABLE `dataproject_hw3_dataset.yellow_tripdata_partitioned_clustered`
+PARTITION BY DATE(tpep_dropoff_datetime)
+CLUSTER BY VendorID
+AS
+SELECT * FROM `dataproject-484804.dataproject_hw3_dataset.yellow_tripdata_2024`;
+```
+
+- SOLUTION: Partition by tpep_dropoff_datetime and Cluster on VendorID
+
 
 
 ## Question 6. Partition benefits
@@ -132,4 +183,10 @@ It is best practice in Big Query to always cluster your data:
 
 No Points: Write a `SELECT count(*)` query FROM the materialized table you created. How many bytes does it estimate will be read? Why?
 
+## Answer
+```sql
+SELECT COUNT(*)
+FROM `dataproject-484804.dataproject_hw3_dataset.yellow_tripdata_2024_material`;
+```
 
+- SOLUTION  0MB
