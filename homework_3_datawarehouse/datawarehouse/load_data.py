@@ -123,7 +123,7 @@ import time
 
 
 # Configuration
-BUCKET_NAME = "20260210_oseghr_bucket"
+BUCKET_NAME = "20260215_data_bucket"
 CREDENTIALS_FILE = "gcs.json"
 DOWNLOAD_DIR = "./downloads"
 CHUNK_SIZE = 8 * 1024 * 1024  # 8MB chunks
@@ -131,8 +131,8 @@ MAX_WORKERS = 4
 MAX_RETRIES = 3
 
 # Data configuration
-YEAR = "2024"
-MONTHS = [f"{i:02d}" for i in range(1, 7)]  # January to June
+YEAR = "2019"
+MONTHS = [f"{i:02d}" for i in range(1, 13)]  # January to December
 TAXI_TYPES = ["yellow", "green"]  # Add more if needed: "fhv", "fhvhv"
 BASE_URL = "https://d37ci6vzurychx.cloudfront.net/trip-data/"
 

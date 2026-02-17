@@ -1,0 +1,49 @@
+version: 2
+
+sources:
+  - name: raw_data
+    description: "Raw taxi trip data from NYC TLC"
+    database: dataproject-484804  # Replace with your BigQuery project ID
+    schema: raw_data
+    tables:
+      - name: green_tripdata
+        description: "Green taxi trip records for 2019-2020"
+        columns:
+          - name: VendorID
+            description: "Provider that provided the record"
+          - name: lpep_pickup_datetime
+            description: "Date and time when the meter was engaged"
+          - name: PULocationID
+            description: "TLC Taxi Zone for pickup"
+            
+      - name: yellow_tripdata
+        description: "Yellow taxi trip records for 2019-2020"
+        columns:
+          - name: VendorID
+            description: "Provider that provided the record"
+          - name: tpep_pickup_datetime
+            description: "Date and time when the meter was engaged"
+          - name: PULocationID
+            description: "TLC Taxi Zone for pickup"
+            
+      - name: fhv_tripdata
+        description: "For-Hire Vehicle trip records for 2019"
+        columns:
+          - name: dispatching_base_num
+            description: "TLC base license number"
+          - name: pickup_datetime
+            description: "Pickup date and time"
+          - name: PULocationID
+            description: "TLC Taxi Zone for pickup"
+            
+      - name: taxi_zone_lookup
+        description: "Taxi zone lookup table"
+        columns:
+          - name: LocationID
+            description: "Taxi zone ID"
+          - name: Borough
+            description: "NYC borough"
+          - name: Zone
+            description: "Zone name"
+          - name: service_zone
+            description: "Service zone category"
