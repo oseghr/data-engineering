@@ -29,10 +29,9 @@ models/
 
 If you run `dbt run --select int_trips_unioned`, what models will be built?
 
-- `stg_green_tripdata`, `stg_yellow_tripdata`, and `int_trips_unioned` (upstream dependencies)
-- Any model with upstream and downstream dependencies to `int_trips_unioned`
-- `int_trips_unioned` only
-- `int_trips_unioned`, `int_trips`, and `fct_trips` (downstream dependencies)
+## Answer
+- SOLUTION: `int_trips_unioned` only
+
 
 ---
 
@@ -54,10 +53,9 @@ Your model `fct_trips` has been running successfully for months. A new value `6`
 
 What happens when you run `dbt test --select fct_trips`?
 
-- dbt will skip the test because the model didn't change
-- dbt will fail the test, returning a non-zero exit code
-- dbt will pass the test with a warning about the new value
-- dbt will update the configuration to include the new value
+## Answer
+- SOLUTION: dbt will fail the test, returning a non-zero exit code
+
 
 ---
 
@@ -67,10 +65,20 @@ After running your dbt project, query the `fct_monthly_zone_revenue` model.
 
 What is the count of records in the `fct_monthly_zone_revenue` model?
 
-- 12,998
-- 14,120
-- 12,184
-- 15,421
+## Answer
+
+```bash
+D SELECT COUNT(*) FROM dev.fct_monthly_zone_revenue;
+┌──────────────┐
+│ count_star() │
+│    int64     │
+├──────────────┤
+│    12232     │
+└──────────────┘
+D 
+```
+- SOLUTION: 12,184
+
 
 ---
 
@@ -80,10 +88,33 @@ Using the `fct_monthly_zone_revenue` table, find the pickup zone with the **high
 
 Which zone had the highest revenue?
 
-- East Harlem North
-- Morningside Heights
-- East Harlem South
-- Washington Heights South
+## Answer
+
+```bash
+D SELECT 
+      z.zone,
+      SUM(f.revenue_monthly_total_amount) as total_revenue
+  FROM dev.fct_monthly_zone_revenue f
+  JOIN dev.dim_zones z ON f.revenue_zone = z.LocationID
+  WHERE f.service_type = 'Green'
+    AND YEAR(f.revenue_month) = 2020
+  GROUP BY z.zone
+  ORDER BY total_revenue DESC
+  LIMIT 5;
+
+┌──────────────────────────┬───────────────┐
+│           zone           │ total_revenue │
+│         varchar          │ decimal(38,3) │
+├──────────────────────────┼───────────────┤
+│ East Harlem North        │   1829912.400 │
+│ East Harlem South        │   1661528.780 │
+│ Central Harlem           │   1101300.350 │
+│ Washington Heights South │    882142.800 │
+│ Morningside Heights      │    767640.340 
+```
+
+- SOLUTION: East Harlem North
+
 
 ---
 
@@ -91,10 +122,22 @@ Which zone had the highest revenue?
 
 Using the `fct_monthly_zone_revenue` table, what is the **total number of trips** (`total_monthly_trips`) for Green taxis in October 2019?
 
-- 500,234
-- 350,891
-- 384,624
-- 421,509
+## Answer
+```bash
+ SELECT SUM(total_monthly_trips) as total_trips
+  FROM dev.fct_monthly_zone_revenue
+  WHERE service_type = 'Green'
+    AND YEAR(revenue_month) = 2019
+    AND MONTH(revenue_month) = 10;
+┌─────────────┐
+│ total_trips │
+│   int128    │
+├─────────────┤
+│   387006    │
+```
+
+- SOLUTION: 384,624
+
 
 ---
 
@@ -109,8 +152,17 @@ Create a staging model for the **For-Hire Vehicle (FHV)** trip data for 2019.
 
 What is the count of records in `stg_fhv_tripdata`?
 
-- 42,084,899
-- 43,244,693
-- 22,998,722
-- 44,112,187
+## Answer
+```bash
+SELECT COUNT(*) FROM main.fhv_tripdata;
+┌─────────────────┐
+│  count_star()   │
+│      int64      │
+├─────────────────┤
+│    43244696     │
+│ (43.24 million) 
+
+```
+- SOLUTION: 43,244,693
+
 

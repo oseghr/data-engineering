@@ -1,5 +1,6 @@
 *.parquet
 *.csv
+data/
 
 
 # Byte-compiled / optimized / DLL files
