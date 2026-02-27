@@ -19,7 +19,7 @@ In a Bruin project, what are the required files/directories?
 
 ## Answer
 
-- SOLUTION:  `.bruin.yml` and `pipeline/` with `pipeline.yml` and `assets/`
+- SOLUTION:  `.bruin.yml` and `pipeline/` (assets can be anywhere)
 
 ---
 
@@ -51,7 +51,7 @@ How do you override this when running the pipeline to only process yellow taxis?
 
 ## Answer
 
-- SOLUTION: `bruin run --var taxi_types=yellow`
+- SOLUTION: `bruin run --var 'taxi_types=["yellow"]'`
 
 
 ---
@@ -62,7 +62,7 @@ You've modified the `ingestion/trips.py` asset and want to run it plus all downs
 
 ## Answer
 
-- SOLTUION: `bruin run --select ingestion.trips+`
+- SOLTUION: `bruin run ingestion/trips.py --downstream`
 
 ---
 
