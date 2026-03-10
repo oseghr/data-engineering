@@ -21,6 +21,9 @@ What's the output?
 > [!NOTE]
 > To install PySpark follow this [guide](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/06-batch/setup/pyspark.md)
 
+## Answer
+- SOLUTION: Spark version: 3.5.3
+
 
 ## Question 2: Yellow November 2025
 
@@ -30,10 +33,9 @@ Repartition the Dataframe to 4 partitions and save it to parquet.
 
 What is the average size of the Parquet (ending with .parquet extension) Files that were created (in MB)? Select the answer which most closely matches.
 
-- 6MB
-- 25MB
-- 75MB
-- 100MB
+## Answer
+- SOLUTION: 25MB
+
 
 
 ## Question 3: Count records
@@ -42,30 +44,25 @@ How many taxi trips were there on the 15th of November?
 
 Consider only trips that started on the 15th of November.
 
-- 62,610
-- 102,340
-- 162,604
-- 225,768
+## Answer
+- SOLUTION: 162,604
 
 
 ## Question 4: Longest trip
 
 What is the length of the longest trip in the dataset in hours?
 
-- 22.7
-- 58.2
-- 90.6
-- 134.5
+## Answer
+- SOLUTION: 90.6
+
 
 
 ## Question 5: User Interface
 
 Spark's User Interface which shows the application's dashboard runs on which local port?
 
-- 80
-- 443
-- 4040
-- 8080
+## Answer
+- SOLUTION: 4040
 
 
 
@@ -78,9 +75,9 @@ wget https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv
 ```
 
 Using the zone lookup data and the Yellow November 2025 data, what is the name of the LEAST frequent pickup location Zone?
+## Answer
+- SOLUTION: Governor's Island/Ellis Island/Liberty Island
 
-- Governor's Island/Ellis Island/Liberty Island
-- Arden Heights
-- Rikers Island
-- Jamaica Bay
+                                 
+
 
