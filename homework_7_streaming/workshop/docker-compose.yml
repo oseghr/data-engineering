@@ -7,7 +7,6 @@
 #   - PostgreSQL: Result sink (port 5432)
 # ============================================================
 
-version: "3.8"
 
 networks:
   streaming-net:

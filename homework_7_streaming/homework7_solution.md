@@ -52,6 +52,17 @@ docker exec -it workshop-redpanda-1 rpk version
 
 What version of Redpanda are you running?
 
+## Answer
+SOLUTION:
+  Version:     v23.3.21
+  Git ref:     2fc6a8cb34
+  Build date:  2024-09-21T11:50:20Z
+  OS/Arch:     linux/amd64
+  Go version:  go1.22.2
+
+  Redpanda Cluster
+    node-0  v23.3.21 - 2fc6a8cb3434a37c1a685abf224cc666325eac35
+
 
 ## Question 2. Sending data to Redpanda
 
@@ -95,10 +106,9 @@ print(f'took {(t1 - t0):.2f} seconds')
 
 How long did it take to send the data?
 
-- 10 seconds
-- 60 seconds
-- 120 seconds
-- 300 seconds
+## Answer
+- SOLUTION: 60 seconds
+
 
 
 ## Question 3. Consumer - trip distance
@@ -110,10 +120,9 @@ Count how many trips have a `trip_distance` greater than 5.0 kilometers.
 
 How many trips have `trip_distance` > 5?
 
-- 6506
-- 7506
-- 8506
-- 9506
+## Answer
+- SOLUTION:8506
+
 
 
 ## Part 2: PyFlink (Questions 4-6)
