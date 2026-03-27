@@ -53,7 +53,8 @@ docker exec -it workshop-redpanda-1 rpk version
 What version of Redpanda are you running?
 
 ## Answer
-SOLUTION:
+- SOLUTION:
+```bash
   Version:     v23.3.21
   Git ref:     2fc6a8cb34
   Build date:  2024-09-21T11:50:20Z
@@ -62,7 +63,7 @@ SOLUTION:
 
   Redpanda Cluster
     node-0  v23.3.21 - 2fc6a8cb3434a37c1a685abf224cc666325eac35
-
+```
 
 ## Question 2. Sending data to Redpanda
 
@@ -121,7 +122,7 @@ Count how many trips have a `trip_distance` greater than 5.0 kilometers.
 How many trips have `trip_distance` > 5?
 
 ## Answer
-- SOLUTION:8506
+- SOLUTION: 8506
 
 
 
@@ -182,15 +183,13 @@ LIMIT 3;
 Which `PULocationID` had the most trips in a single 5-minute window?
 
 ## Answer
-''' bash
+```bash
 pulocationid | num_trips 
 --------------+-----------
            74 |        15
            74 |        14
            74 |        13
-'''
-
-
+```
 - SOLUTION: 74
 
 
@@ -210,14 +209,14 @@ with the longest session (most trips in a single session).
 How many trips were in the longest session?
 
 ## Answer
-'''bash
+```bash
  pulocationid | num_trips 
 --------------+-----------
            74 |        81
            74 |        72
            74 |        71
 (3 rows)
-'''
+```
 
 - SOLUTION: 81
 
@@ -231,12 +230,12 @@ Which hour had the highest total tip amount?
 
 ## Answer
 
-'''bash
+```bash
     window_start     |     total_tip      
 ---------------------+--------------------
  2025-10-16 18:00:00 |  510.8599999999999
  2025-10-30 16:00:00 |              507.1
  2025-10-09 18:00:00 | 472.01000000000016
-'''
+```
 
 - SOLUTION: 2025-10-16 18:00:00
