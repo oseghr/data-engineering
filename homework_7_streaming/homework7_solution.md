@@ -181,10 +181,18 @@ LIMIT 3;
 
 Which `PULocationID` had the most trips in a single 5-minute window?
 
-- 42
-- 74
-- 75
-- 166
+## Answer
+''' bash
+pulocationid | num_trips 
+--------------+-----------
+           74 |        15
+           74 |        14
+           74 |        13
+'''
+
+
+- SOLUTION: 74
+
 
 
 ## Question 5. Session window - longest streak
@@ -201,10 +209,17 @@ with the longest session (most trips in a single session).
 
 How many trips were in the longest session?
 
-- 12
-- 31
-- 51
-- 81
+## Answer
+'''bash
+ pulocationid | num_trips 
+--------------+-----------
+           74 |        81
+           74 |        72
+           74 |        71
+(3 rows)
+'''
+
+- SOLUTION: 81
 
 
 ## Question 6. Tumbling window - largest tip
@@ -214,7 +229,14 @@ total `tip_amount` per hour (across all locations).
 
 Which hour had the highest total tip amount?
 
-- 2025-10-01 18:00:00
-- 2025-10-16 18:00:00
-- 2025-10-22 08:00:00
-- 2025-10-30 16:00:00
+## Answer
+
+'''bash
+    window_start     |     total_tip      
+---------------------+--------------------
+ 2025-10-16 18:00:00 |  510.8599999999999
+ 2025-10-30 16:00:00 |              507.1
+ 2025-10-09 18:00:00 | 472.01000000000016
+'''
+
+- SOLUTION: 2025-10-16 18:00:00

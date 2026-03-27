@@ -7,7 +7,7 @@
 CREATE TABLE IF NOT EXISTS trip_counts_by_location (
     window_start TIMESTAMP,
     window_end   TIMESTAMP,
-    "PULocationID" INT,
+    \"PULocationID\" INT,
     num_trips    BIGINT
 );
 
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS trip_counts_by_location (
 CREATE TABLE IF NOT EXISTS session_trips (
     window_start TIMESTAMP,
     window_end   TIMESTAMP,
-    "PULocationID" INT,
+    \"PULocationID\" INT,
     num_trips    BIGINT
 );
 
