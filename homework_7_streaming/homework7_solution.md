@@ -108,7 +108,13 @@ print(f'took {(t1 - t0):.2f} seconds')
 How long did it take to send the data?
 
 ## Answer
-- SOLUTION: 60 seconds
+
+```bash
+Loading parquet file...
+Loaded 49416 rows
+Sent 49416 messages in 9.34 seconds
+```
+- SOLUTION: 10 seconds
 
 
 
@@ -122,6 +128,9 @@ Count how many trips have a `trip_distance` greater than 5.0 kilometers.
 How many trips have `trip_distance` > 5?
 
 ## Answer
+```bash
+
+```
 - SOLUTION: 8506
 
 
