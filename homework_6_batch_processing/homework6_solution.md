@@ -77,7 +77,6 @@ wget https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv
 Using the zone lookup data and the Yellow November 2025 data, what is the name of the LEAST frequent pickup location Zone?
 ## Answer
 - SOLUTION: Governor's Island/Ellis Island/Liberty Island
-
                                  
 
 

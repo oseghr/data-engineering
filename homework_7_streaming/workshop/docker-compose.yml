@@ -1,0 +1,128 @@
+# ============================================================
+# Module 7 Streaming Homework — Full Stack
+# Services:
+#   - Redpanda  : Kafka-compatible broker (port 9092)
+#   - Flink JM  : Job Manager UI at http://localhost:8081
+#   - Flink TM  : Task Manager (runs the actual Flink jobs)
+#   - PostgreSQL: Result sink (port 5432)
+# ============================================================
+
+version: "3.8"
+
+networks:
+  streaming-net:
+    driver: bridge
+
+services:
+
+  # ----------------------------------------------------------
+  # Redpanda — drop-in Kafka replacement
+  # Exposes port 9092 for producers/consumers on your host
+  # Internally, Flink containers reach it via "redpanda:29092"
+  # (two listeners: one for external, one for internal Docker)
+  # ----------------------------------------------------------
+  redpanda:
+    image: redpandadata/redpanda:v23.3.21
+    container_name: workshop-redpanda-1
+    command:
+      - redpanda
+      - start
+      - --kafka-addr internal://0.0.0.0:29092,external://0.0.0.0:9092
+      - --advertise-kafka-addr internal://redpanda:29092,external://localhost:9092
+      - --pandaproxy-addr internal://0.0.0.0:8082,external://0.0.0.0:18082
+      - --advertise-pandaproxy-addr internal://redpanda:8082,external://localhost:18082
+      - --schema-registry-addr internal://0.0.0.0:8081,external://0.0.0.0:18081
+      - --rpc-addr redpanda:33145
+      - --advertise-rpc-addr redpanda:33145
+      - --smp 1
+      - --memory 1G
+      - --mode dev-container
+      - --default-log-level=warn
+    ports:
+      - "9092:9092"       # External Kafka API (your host machine)
+      - "18081:18081"     # Schema Registry
+      - "18082:18082"     # HTTP Proxy
+    networks:
+      - streaming-net
+    volumes:
+      - redpanda-data:/var/lib/redpanda/data
+    healthcheck:
+      test: ["CMD", "rpk", "cluster", "info", "--brokers", "localhost:9092"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ----------------------------------------------------------
+  # PostgreSQL — stores Flink job results
+  # ----------------------------------------------------------
+  postgres:
+    image: postgres:15
+    container_name: workshop-postgres-1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - streaming-net
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql  # auto-creates tables on startup
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ----------------------------------------------------------
+  # Flink Job Manager — orchestrates Flink jobs
+  # UI at http://localhost:8081
+  # ----------------------------------------------------------
+  jobmanager:
+    build: .                          # uses our custom Dockerfile
+    container_name: workshop-jobmanager-1
+    command: jobmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        parallelism.default: 1
+    ports:
+      - "8081:8081"
+    networks:
+      - streaming-net
+    volumes:
+      - ./src:/opt/src                # mount your job files into Flink
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redpanda:
+        condition: service_healthy
+
+  # ----------------------------------------------------------
+  # Flink Task Manager — executes the actual job work
+  # ----------------------------------------------------------
+  taskmanager:
+    build: .
+    container_name: workshop-taskmanager-1
+    command: taskmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 4
+        parallelism.default: 1
+    networks:
+      - streaming-net
+    volumes:
+      - ./src:/opt/src
+    depends_on:
+      - jobmanager
+
+# ----------------------------------------------------------
+# Named volumes (persist data between restarts)
+# ----------------------------------------------------------
+volumes:
+  redpanda-data:
+  postgres-data:
