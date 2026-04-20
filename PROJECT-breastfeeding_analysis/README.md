@@ -18,44 +18,44 @@ This project answers two questions:
 ---
 
 ## Architecture
-
-UNICEF Data Warehouse (CSV)
-│
-▼
-[Prefect Batch Pipeline]
-├── download_data.py      → fetches raw CSV
-├── upload_to_gcs.py      → stores in GCS data lake
-└── load_to_bigquery.py   → loads into BigQuery raw table
-│
-▼
-[GCS Bucket]  ← raw zone (data lake)
-breastfeeding-analytics-breastfeeding-lake/raw/breastfeeding/
-│
-▼
-[BigQuery — breastfeeding_analytics dataset]
-├── raw_bf_rates           → raw ingested table
-├── stg_breastfeeding      → dbt staging view (cleaned)
-└── fact_bf_rates          → dbt mart table (partitioned + clustered)
-│
-▼
-[Looker Studio Dashboard]
-├── Tile 1: Geo map — exclusive BF rate by country
-└── Tile 2: Line chart — global BF rate trend 2000–2023
-
+```
+  UNICEF Data Warehouse (CSV)
+  │
+  ▼
+  [Prefect Batch Pipeline]
+  ├── download_data.py      → fetches raw CSV
+  ├── upload_to_gcs.py      → stores in GCS data lake
+  └── load_to_bigquery.py   → loads into BigQuery raw table
+  │
+  ▼
+  [GCS Bucket]  ← raw zone (data lake)
+  breastfeeding-analytics-breastfeeding-lake/raw/breastfeeding/
+  │
+  ▼
+  [BigQuery — breastfeeding_analytics dataset]
+  ├── raw_bf_rates           → raw ingested table
+  ├── stg_breastfeeding      → dbt staging view (cleaned)
+  └── fact_bf_rates          → dbt mart table (partitioned + clustered)
+  │
+  ▼
+  [Looker Studio Dashboard]
+  ├── Tile 1: Geo map — exclusive BF rate by country
+  └── Tile 2: Line chart — global BF rate trend 2000–2023
+```
 ---
 
 ## Technologies
 
-| Layer | Tool |
-|---|---|
-| Cloud | Google Cloud Platform (GCP) |
-| Infrastructure as Code | Terraform |
-| Data Lake | Google Cloud Storage (GCS) |
-| Workflow Orchestration | Prefect |
-| Data Warehouse | BigQuery |
-| Transformations | dbt Core + dbt-bigquery |
-| Dashboard | Looker Studio |
-| Language | Python 3.12 |
+  | Layer | Tool |
+  |---|---|
+  | Cloud | Google Cloud Platform (GCP) |
+  | Infrastructure as Code | Terraform |
+  | Data Lake | Google Cloud Storage (GCS) |
+  | Workflow Orchestration | Prefect |
+  | Data Warehouse | BigQuery |
+  | Transformations | dbt Core + dbt-bigquery |
+  | Dashboard | Looker Studio |
+  | Language | Python 3.12 |
 
 ---
 
@@ -181,18 +181,19 @@ dbt run --project-dir . --profiles-dir .
 ---
 
 ## Project Structure
-breastfeeding-analytics/
-├── terraform/              # IaC — provisions GCS + BigQuery
-├── ingestion/              # Python scripts — download + GCS upload
-├── orchestration/          # Prefect flow — full pipeline DAG
-├── dbt_transform/          # dbt models — staging + mart
-│   └── models/
-│       ├── staging/        # stg_breastfeeding (view)
-│       └── marts/          # fact_bf_rates (partitioned table)
-├── dashboard/              # Screenshots of Looker Studio tiles
-├── requirements.txt
-└── README.md
-
+```
+  breastfeeding-analytics/
+  ├── terraform/              # IaC — provisions GCS + BigQuery
+  ├── ingestion/              # Python scripts — download + GCS upload
+  ├── orchestration/          # Prefect flow — full pipeline DAG
+  ├── dbt_transform/          # dbt models — staging + mart
+  │   └── models/
+  │       ├── staging/        # stg_breastfeeding (view)
+  │       └── marts/          # fact_bf_rates (partitioned table)
+  ├── dashboard/              # Screenshots of Looker Studio tiles
+  ├── requirements.txt
+  └── README.md
+```
 ---
 
 ## Course
