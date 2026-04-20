@@ -13,11 +13,6 @@ resource "google_storage_bucket" "data_lake" {
   name          = "${var.project_id}-breastfeeding-lake"
   location      = var.region
   force_destroy = true
-
-  lifecycle_rule {
-    action { type = "Delete" }
-    condition { age = 30 }
-  }
 }
 
 resource "google_bigquery_dataset" "breastfeeding" {

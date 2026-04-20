@@ -18,6 +18,7 @@ keys/
 build/
 develop-eggs/
 dist/
+google-cloud-sdk/
 downloads/
 eggs/
 .eggs/

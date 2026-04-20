@@ -1,0 +1,11 @@
+breastfeeding_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: breastfeeding-analytics
+      dataset: breastfeeding_analytics
+      location: US
+      threads: 4
+      timeout_seconds: 300

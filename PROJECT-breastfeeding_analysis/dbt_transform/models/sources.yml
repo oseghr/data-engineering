@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: breastfeeding_analytics
+    database: breastfeeding-analytics
+    schema: breastfeeding_analytics
+    tables:
+      - name: raw_bf_rates
+        description: "Raw UNICEF infant feeding indicators"

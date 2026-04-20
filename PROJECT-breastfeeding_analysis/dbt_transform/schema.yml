@@ -23,36 +23,36 @@ models:
         tests: [unique, not_null]
 ```
 
----
 
-## Step 5 — Dashboard (Looker Studio)
 
-Connect BigQuery → Looker Studio → `fact_bf_rates`. Build exactly these two tiles:
+# ## Step 5 — Dashboard (Looker Studio)
 
-| Tile | Chart type | X-axis | Y-axis | Filter |
-|---|---|---|---|---|
-| 1 | Geo map or bar | country_name | rate_pct | indicator = Exclusive BF, year = latest |
-| 2 | Line chart | year | avg(rate_pct) | indicator = Exclusive BF, region = dimension |
+# Connect BigQuery → Looker Studio → `fact_bf_rates`. Build exactly these two tiles:
 
-Both tiles need: a title, axis labels, a data source note ("Source: UNICEF 2000–2023"), and a region/indicator filter control at the top.
+# | Tile | Chart type | X-axis | Y-axis | Filter |
+# |---|---|---|---|---|
+# | 1 | Geo map or bar | country_name | rate_pct | indicator = Exclusive BF, year = latest |
+# | 2 | Line chart | year | avg(rate_pct) | indicator = Exclusive BF, region = dimension |
 
----
+# Both tiles need: a title, axis labels, a data source note ("Source: UNICEF 2000–2023"), and a region/indicator filter control at the top.
 
-## Step 6 — README (reproducibility = 4pts)
+# ---
 
-Your README must include these exact sections: **Problem Description, Architecture, Technologies, Dataset, Setup (step-by-step), How to Run, Dashboard Link, Screenshots**. That's what graders look for — a stranger should be able to clone and run it without asking you anything.
+# ## Step 6 — README (reproducibility = 4pts)
 
----
+# Your README must include these exact sections: **Problem Description, Architecture, Technologies, Dataset, Setup (step-by-step), How to Run, Dashboard Link, Screenshots**. That's what graders look for — a stranger should be able to clone and run it without asking you anything.
 
-## Execution Order
-```
-1. gcloud auth application-default login
-2. cd terraform && terraform apply
-3. pip install -r requirements.txt
-4. python -m ingestion.download_data
-5. python -m ingestion.upload_to_gcs
-6. bq mk --dataset $GCP_PROJECT:breastfeeding_analytics
-7. python orchestration/pipeline_flow.py        # runs full flow once
-8. cd dbt_transform && dbt run
-9. Open Looker Studio → build 2 tiles
-10. Write README → push to GitHub
+# ---
+
+# ## Execution Order
+# ```
+# 1. gcloud auth application-default login
+# 2. cd terraform && terraform apply
+# 3. pip install -r requirements.txt
+# 4. python -m ingestion.download_data
+# 5. python -m ingestion.upload_to_gcs
+# 6. bq mk --dataset $GCP_PROJECT:breastfeeding_analytics
+# 7. python orchestration/pipeline_flow.py        # runs full flow once
+# 8. cd dbt_transform && dbt run
+# 9. Open Looker Studio → build 2 tiles
+# 10. Write README → push to GitHub

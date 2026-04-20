@@ -1,0 +1,6 @@
+google-cloud-storage
+google-cloud-bigquery
+prefect
+requests
+dbt-bigquery
+dbt-core
