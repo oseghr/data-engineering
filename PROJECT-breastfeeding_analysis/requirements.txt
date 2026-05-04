@@ -1,6 +1,9 @@
 google-cloud-storage
 google-cloud-bigquery
+google-cloud-bigquery-storage
 prefect
 requests
+pandas
+pyarrow
 dbt-bigquery
 dbt-core

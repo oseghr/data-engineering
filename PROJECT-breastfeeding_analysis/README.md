@@ -7,13 +7,21 @@ UNICEF infant feeding data to expose gaps in global breastfeeding practices.
 
 ## Problem Description
 
-Undernutrition is associated with 45% of all child deaths under age 5 globally.
-WHO and UNICEF recommend exclusive breastfeeding for the first 6 months of life,
-yet only ~44% of infants worldwide were exclusively breastfed between 2015–2020.
+**Question:** Which countries are failing WHO breastfeeding targets, and is the
+global rate improving fast enough to meet them?
 
-This project answers two questions:
-1. Which countries have the lowest exclusive breastfeeding rates today?
-2. Is the global breastfeeding rate improving over time?
+WHO recommends exclusive breastfeeding for the first 6 months of life for every
+child. Meeting this target globally could prevent over 820,000 child deaths
+annually. Yet as of 2020, only 44% of infants worldwide were exclusively
+breastfed — less than half the population this recommendation covers.
+
+This project builds a data pipeline to:
+1. Ingest UNICEF's country-level breastfeeding indicators (195 countries, 2000–2023)
+2. Transform raw survey data into analytics-ready models in BigQuery
+3. Identify which countries fall below the WHO 50% target
+4. Visualise geographic distribution and temporal trend to answer whether
+   global progress is on track
+
 
 ---
 
@@ -105,6 +113,13 @@ concentrated in specific geographies.
 
 The data reinforces WHO's position that scaling exclusive breastfeeding to
 90% globally could prevent over 820,000 child deaths annually.
+
+**Conclusion from the data:** Sub-Saharan Africa and South/Southeast Asia
+consistently exceed 80% exclusive breastfeeding rates. High-income regions
+(North America, Western Europe) fall well below 20% — driven by formula
+marketing, shorter maternity leave, and cultural norms. The global trend
+shows improving data coverage but only modest rate improvement, suggesting
+policy intervention — not just monitoring — is needed.
 
 ---
 

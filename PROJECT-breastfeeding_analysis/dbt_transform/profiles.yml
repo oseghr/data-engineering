@@ -4,7 +4,7 @@ breastfeeding_analytics:
     dev:
       type: bigquery
       method: oauth
-      project: breastfeeding-analytics
+      project: "{{ env_var('GCP_PROJECT') }}"
       dataset: breastfeeding_analytics
       location: US
       threads: 4
