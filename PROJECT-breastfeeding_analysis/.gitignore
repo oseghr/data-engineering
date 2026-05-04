@@ -1,0 +1,17 @@
+# Terraform
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.*
+terraform/.terraform.lock.hcl
+terraform/terraform.tfvars
+
+# Python
+__pycache__/
+*.pyc
+.env
+data/
+
+# dbt
+dbt_transform/target/
+dbt_transform/dbt_packages/
+dbt_transform/logs/
